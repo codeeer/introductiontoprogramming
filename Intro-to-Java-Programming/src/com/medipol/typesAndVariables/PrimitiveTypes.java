@@ -1,4 +1,4 @@
-package com.medipol.types;
+package com.medipol.typesAndVariables;
 
 public class PrimitiveTypes {
 

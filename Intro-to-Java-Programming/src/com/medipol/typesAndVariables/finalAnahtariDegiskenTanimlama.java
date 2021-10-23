@@ -1,4 +1,4 @@
-package com.medipol.exercises;
+package com.medipol.typesAndVariables;
 
 public class finalAnahtariDegiskenTanimlama {
 

@@ -1,4 +1,4 @@
-package com.medipol.exercises;
+package com.medipol.conditionals;
 
 import java.util.Scanner;
 
