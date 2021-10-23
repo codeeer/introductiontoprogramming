@@ -7,7 +7,7 @@ public class IkinciDerecedenBirDenkleminKokleri {
 
 		a b ve c değişkenleri kullanıcıdan girilmesi istenecektir.
 		
-		Diskrement > ∆=b^2–­4ac
+		Diskrement > ∆=b^2–4ac
 		
 		ifadesini hesaplamamız gerekir. Diskriminantın değerlerine göre, eğer ∆<0  ise denklemin gerçel sayılarla ifade edilebilecek bir kökü yoktur.
 		
