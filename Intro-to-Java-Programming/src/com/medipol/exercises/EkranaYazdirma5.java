@@ -11,7 +11,7 @@ Write a program that solves the following equation and displays the value for x 
 */
 
 
-public class Exercise6 {
+public class EkranaYazdirma5 {
 	
 
 	public static void main(String[] args) {

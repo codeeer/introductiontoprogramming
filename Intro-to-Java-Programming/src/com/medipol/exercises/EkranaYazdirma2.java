@@ -1,6 +1,6 @@
 package com.medipol.exercises;
 
-public class Exercise1 {
+public class EkranaYazdirma2 {
 
 	public static void main(String[] args) {
 		

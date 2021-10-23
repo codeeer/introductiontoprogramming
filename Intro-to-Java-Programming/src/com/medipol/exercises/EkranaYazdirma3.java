@@ -1,6 +1,6 @@
 package com.medipol.exercises;
 
-public class Exercise4 {
+public class EkranaYazdirma3 {
 	
 	public static void main(String[] args) {
 		System.out.println("a	a^2	 a^3");
