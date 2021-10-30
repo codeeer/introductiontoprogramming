@@ -7,11 +7,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		System.out.print("Ýlk sayýyý girin: ");
+		System.out.print("Ilk sayiyi girin: ");
 		int a = input.nextInt();
-		System.out.print("Ýkinci sayýyý girin: ");
+		System.out.print("Ikinci sayiyi girin: ");
 		int b = input.nextInt();
-		System.out.print("Son sayýyý girin: ");
+		System.out.print("Son sayiyi girin: ");
 		int c = input.nextInt();
 		
 		//System.out.println(a+b+c);
@@ -19,12 +19,12 @@ public class Main {
 		//System.out.println(diskriminant);
 	
 		if(diskriminant < 0) {
-			System.out.println("Denklemin gerçek sayýlarla ifade edilebilecek bir kökü yoktur.");
+			System.out.println("Denklemin gerÃ§ek sayilarla ifade edilebilecek bir kÃ¶kÃ¼ yoktur.");
 		} else if(diskriminant == 0) {
-			System.out.println("Denklemin birbiriyle çakýþan ortak kökleri: " + (-b)/(2*a));
+			System.out.println("Denklemin birbiriyle Ã§akisan ortak kÃ¶kleri: " + (-b)/(2*a));
 		} else if(diskriminant > 0) {
-			System.out.println("1.kök: " + ( (-b) + Math.sqrt(diskriminant) ) / (2*a) );
-			System.out.println("2.kök: " + ( (-b) - Math.sqrt(diskriminant) ) / (2*a) );
+			System.out.println("1.kÃ¶k: " + ( (-b) + Math.sqrt(diskriminant) ) / (2*a) );
+			System.out.println("2.kÃ¶k: " + ( (-b) - Math.sqrt(diskriminant) ) / (2*a) );
 		}
 		
 
