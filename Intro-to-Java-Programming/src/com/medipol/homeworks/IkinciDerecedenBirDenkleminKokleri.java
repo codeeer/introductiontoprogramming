@@ -39,9 +39,18 @@ public class IkinciDerecedenBirDenkleminKokleri {
 		 double c = sc.nextInt();
 		 
 		 double delta=(b*b)-(4*a*c);
+
+		 
+	
 		 if(delta >0) {
-			 double x1= ((-1*b)- Math.sqrt(delta))/(2*a);
-			 double x2= ((-1*b)+ Math.sqrt(delta))/(2*a);
+			
+			 
+			 double deltaninKareKoku = Math.sqrt(delta);
+			 double ustKisim = -b - deltaninKareKoku;
+			 double x1 = ustKisim / (2*a);
+			
+		
+			 double x2= (-b+ Math.sqrt(delta))/(2*a);
 			 System.out.println("x1 =" + x1 +"\n x2 =" + x2);
 		 }
 		if(delta <0) {
@@ -49,7 +58,7 @@ public class IkinciDerecedenBirDenkleminKokleri {
 		
 			 }
 		if(delta == 0) {
-			double x = (-1*b)/(2*a);
+			double x = (-b)/(2*a);
 			System.out.println("çakisik kökü vardir x1=x2"+x);
 		}
 	    }

@@ -32,12 +32,13 @@ public class ScannerNesnesi {
 		/*
 		 * Kullanicidan 2 sayi al ve bu sayilari topla
 		 */
+		System.out.println("Sayi toplama uygulamasini hosgeldiniz : ");
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Lütfen ilk tamsayıyı giriniz : ");
 		int n = scan.nextInt();
 		System.out.println("Lütfen ikinci tamsayıyı giriniz : ");
 		int m = scan.nextInt();
-		System.out.print(n + m);
+		System.out.printf("Iki sayinin toplami: %d",n + m);
 	}
 
 }

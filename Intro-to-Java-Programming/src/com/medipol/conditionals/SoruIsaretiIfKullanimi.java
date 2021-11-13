@@ -11,7 +11,15 @@ public class SoruIsaretiIfKullanimi {
 		double not;
 		System.out.println("Sinav notunu (0-100) giriniz: ");
 		not = giris.nextDouble();
+		
 		sonuc = not >= 50 ? "Basarili" : "Basarisiz";
+		
+		if(not >= 50) {
+			sonuc = "Bsarili";
+		}
+		else {
+			sonuc = "Basarisiz";
+		}
 		System.out.println("Sonuc: " + sonuc);
 
 	}

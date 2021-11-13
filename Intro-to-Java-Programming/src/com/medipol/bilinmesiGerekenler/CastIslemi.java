@@ -6,7 +6,7 @@ public class CastIslemi {
 
 		int k;
 		double l;
-		//l = k = 13.72;
+	//	l = k = 13.72;
 		l = k = (int)13.72;
 		System.out.println("l=" + l);
 		System.out.println("k=" + k);

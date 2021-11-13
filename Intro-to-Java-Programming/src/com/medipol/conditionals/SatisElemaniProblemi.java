@@ -12,10 +12,10 @@ public class SatisElemaniProblemi {
 	- Günlük satış miktarı 50 adet ya da daha fazla ise, bu durumda günlük sabit ücret 15 TL alınarak, satılan ürün başına da ilk 50 adet ürün için 2 TL, 50 adedi aşan kısım için de 3 TL prim verilerek günlük ücret belirlenir.
 	Bir satıcının günlük satış miktarı bilgisayara girildiğinde satıcının alacağı günlük ücreti hesaplayan bir Java programı yazınız.
 	 */
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[])  {
 		Scanner giris = new Scanner(System.in);
 		double satis, ucret; // DecimalFormat tipiyle özel biçimlerde sayılar gösterebilirsiniz.
-		DecimalFormat nf = new DecimalFormat("###,###.00");
+		
 		System.out.println("Gunluk kac tane urun satiyorsunuz? ");
 		satis = giris.nextDouble();
 		if (satis < 50) {
@@ -23,7 +23,7 @@ public class SatisElemaniProblemi {
 		} else {
 			ucret = 15.0 + 50 * 2.0 + (satis - 50) * 3.0;
 		}
-		System.out.println("Buna gore gunluk ucretiniz: " + nf.format(ucret) + " TL");
+		System.out.println("Buna gore gunluk ucretiniz: " + ucret + " TL");
 	}
 
 }
