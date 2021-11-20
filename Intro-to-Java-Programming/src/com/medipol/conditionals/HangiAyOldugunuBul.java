@@ -1,10 +1,13 @@
 package com.medipol.conditionals;
 
+import java.util.Scanner;
+
 public class HangiAyOldugunuBul {
 
 	public static void main(String[] args) {
-		int ay = 5;
-		System.out.println("switch'ten önceki kod kesimi");
+		Scanner giris = new Scanner(System.in);
+		System.out.println("ayi sayi olarak giriniz(1-12)");
+		int ay = giris.nextInt();
 		switch (ay) {
 		case 1:
 			System.out.println("Ocak");
@@ -45,6 +48,7 @@ public class HangiAyOldugunuBul {
 		default:
 			System.out.println("Ay 1 - 12 aralığında değil");
 		}
+		
 		System.out.println("switch'ten sonraki kod kesimi");
 
 	}

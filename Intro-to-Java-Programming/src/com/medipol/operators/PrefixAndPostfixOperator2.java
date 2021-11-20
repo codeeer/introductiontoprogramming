@@ -3,13 +3,13 @@ package com.medipol.operators;
 public class PrefixAndPostfixOperator2 {
 
 	public static void main(String[] args) {
-		int m, n, p, q;
+		int m, n, p, q,t;
 
 		m = 4;
 		n = 2;
 		p = 10;
 		q = 8;
-
+        
 		m = -m++;
 		n = n--;
 		p = --p;

@@ -15,11 +15,15 @@ public class KarekokunuBul {
 		double sayi;
 		System.out.println("Karekokunu bulmak icin bir sayi giriniz: ");
 		sayi = giris.nextDouble();
-		if (sayi < 0)
+		if (sayi < 0) {
 			System.out.println("Olmadi, pozitif sayi girmeliydiniz");
-		else
+		}
+		else {
 			System.out.println(sayi + "'nin karekoku: " + Math.sqrt(sayi));
-
+		}
+		
+		
+		
 	}
 
 }

@@ -14,23 +14,23 @@ public class TurSorusu {
 	public static void main(String[] args) {
 	     
         Scanner giris = new Scanner(System.in);
-        int i;
+        String i;
         System.out.println("Portakal Turizm A.S. Sunar");
         System.out.println("(1) Orta Avrupa Turu");
         System.out.println("(2) Amerika Turu");
         System.out.println("(3) Uzak Dogu Turu");
         System.out.println("Seciminiz?");
-        i = giris.nextInt();
+        i = giris.nextLine();
         switch (i) {
-        case 1 :
+        case "OrtaAvrupa" :
             System.out.println("Ucak ile Viyana, Budapeste, Prag");
-            System.out.println("4 yildizli otellerde sok! 1700$\n");
+            System.out.println("4 yildizli otellerde sok! 1700$");
             break;
-        case 2 :
+        case "Amerika" :
             System.out.println("Ozel ucak ile New York, Boston, Los Angeles");
             System.out.println("5 yildizli otellerde sok! 3700$\n");
             break;
-        case 3 :
+        case "UzakDogu" :
             System.out.println("Ozel ucak ile Bang Kong, Hong Kong");
             System.out.println("Tokyo, Pekin");
             System.out.println("5 yildizli otellerde sok! 4000$\n");

@@ -18,25 +18,26 @@ public class VergiHesabi {
 	 */
 
 	public static void main(String[] args) {
+		
 		Scanner giris = new Scanner(System.in);
         double gelir, v, v1, v2, v3, v4;
         System.out.println("Gelir miktarınız (TL): ");
         gelir = giris.nextDouble();
-        v1 = 150000000 * 0.25;
-        v2 = 150000000 * 0.30;
-        v3 = 300000000 * 0.35;
-        v4 = 600000000 * 0.40;
-        if (gelir <= 150000000)
+        v1 = 150 * 0.25;
+        v2 = 150 * 0.30;
+        v3 = 300 * 0.35;
+        v4 = 600 * 0.40;
+        if (gelir <= 150)
             v = gelir * 0.25;
-        else if (gelir <= 300000000)
-            v = v1 + (gelir - 150000000) * 0.3;
-        else if (gelir <= 600000000)
-            v = v1 + v2 + (gelir - 300000000) * 0.35;
-        else if (gelir <= 1200000000)
-            v = v1 + v2 + v3 + (gelir - 600000000) * 0.4;
+        else if (gelir <= 300)
+            v = v1 + (gelir - 150) * 0.3;
+        else if (gelir <= 600)
+            v = v1 + v2 + (gelir - 300) * 0.35;
+        else if (gelir <= 1200)
+            v = v1 + v2 + v3 + (gelir - 600) * 0.4;
         else
-            v = v1 + v2 + v3 + v4 + (gelir - 1200000000) * 0.5;
-        System.out.println("Odemeniz gereken vergi: " + v);
+            v = v1 + v2 + v3 + v4 + (gelir - 1200) * 0.5;
+        System.out.printf("Odemeniz gereken vergi: %f" , v);
 
 	}
 
