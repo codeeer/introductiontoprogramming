@@ -9,7 +9,8 @@ public class OnKereJavaYaz {
 		}
 	}
 
-	public static void Main(String[] Args) {
+	public static void main(String[] Args) {
+
 		javaKelimesiniYaz(10);
 	}
 
