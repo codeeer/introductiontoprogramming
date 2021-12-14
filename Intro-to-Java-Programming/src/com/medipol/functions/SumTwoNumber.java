@@ -1,6 +1,7 @@
 package com.medipol.functions;
 
 import java.util.Scanner;
+
 public class SumTwoNumber
 {
     public static void main(String[] args)

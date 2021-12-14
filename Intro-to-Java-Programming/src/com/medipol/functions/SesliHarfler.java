@@ -9,13 +9,13 @@ public class SesliHarfler {
 		
 		String kelime = giris.nextLine();
 		
-		int sesliHarfSayisi = count_Vowels(kelime);
+		int sesliHarfSayisi = sesliHarfBul(kelime);
 		
 		System.out.println(sesliHarfSayisi+"");
 
 	}
 
-	public static int count_Vowels(String str) {
+	public static int sesliHarfBul(String str) {
 		int count = 0;
 		int length = str.length();
 		for (int i = 0; i < length; i++) {

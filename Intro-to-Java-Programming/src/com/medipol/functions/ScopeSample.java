@@ -12,3 +12,4 @@ public class ScopeSample {
 		System.out.println("x = " + x + " y = " + y);
 	}
 }
+
