@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class tekMiCiftMi {
 
+	final static int pi= 3;
+	
     public static void main(String[] args) {
         //creating Scanner class object
         Scanner scan=new Scanner(System.in);
@@ -12,6 +14,9 @@ public class tekMiCiftMi {
         int num=scan.nextInt();
         //method calling
         findEvenOrOdd(num);
+    
+        boolean sonuc = ciftMiTekmi(6);
+        System.out.println(sonuc);
     }
 
     //user defined method
@@ -22,5 +27,13 @@ public class tekMiCiftMi {
             System.out.println(num+" is even");
         else
             System.out.println(num+" is odd");
+    }
+    
+    public static boolean ciftMiTekmi( int a) {
+    
+    	if(a %2 == 0)
+    		return true;
+    	else
+    		return false;
     }
 }

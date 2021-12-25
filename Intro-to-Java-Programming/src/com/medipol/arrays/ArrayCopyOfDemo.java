@@ -16,4 +16,15 @@ public class ArrayCopyOfDemo {
             System.out.print(copyTo[i] + " ");
         }
     }
+    
+    public static String[] copyOfRange(String[] dizi,int altSinir,int ustSinir) {
+    	
+    	String[] returnDizi = new String[ustSinir-altSinir];
+    	int j = 0;
+    	for (int i = altSinir; i < ustSinir; i++) {
+			returnDizi[j] = dizi[altSinir];
+			j++;
+		}
+    	return returnDizi;
+    }
 }

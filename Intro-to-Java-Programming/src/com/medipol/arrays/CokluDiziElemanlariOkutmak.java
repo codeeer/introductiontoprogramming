@@ -32,8 +32,8 @@ public class CokluDiziElemanlariOkutmak {
         /* bellekteki satis tablosu
          * elemanlarının ekrana yazdırılması */
         System.out.println("Satis tablonuz");
-        for (i = 0; i <= 2; i++) {
-            for (j = 0; j <= 1; j++) {
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 2; j++) {
                 System.out.print(satisTablosu[i][j] + " ");
             }
             System.out.println();

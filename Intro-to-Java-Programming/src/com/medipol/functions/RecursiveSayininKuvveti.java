@@ -13,6 +13,7 @@ public class RecursiveSayininKuvveti {
         int kuvvet = giris.nextInt();
         int sonuc = kuvveti(sayi,kuvvet);
         System.out.println(sayi + " nin " + kuvvet +". ci kuvveti: "+sonuc);
+
     }
 
     public static int kuvveti(int s,int k){
@@ -27,5 +28,23 @@ public class RecursiveSayininKuvveti {
           //  f(2,2) = 2 * f(2,1);
           //  f(2,1) = 2 * f(2,0)
         }
+        
+        
     }
+    
+    
+    public static int kuvvetiniAl(int sayi,int ussu) {
+    	
+    	if(ussu == 0) {
+    		return 1;
+    	}
+    	else {
+    		return sayi * kuvvetiniAl(sayi, ussu-1);
+    	}
+    	
+    }
+    
+    
+    
+    
 }
