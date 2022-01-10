@@ -11,7 +11,7 @@ public class CokBoyutluDiziEnBuyugunEnKucukElemaniBul {
 		            {654,33,22,67},
 		            {189,35,56,89}
 		    };
-		//System.out.println(sutundakiEnKucukSayiyiBul(matris,enBuyukElemaninOlduguSutunuDon(matris)));
+		System.out.println(sutundakiEnKucukSayiyiBul(matris,enBuyukElemaninOlduguSutunuDon(matris)));
 		
 		 int[][] matris2={
 		            {56,23,678,231},

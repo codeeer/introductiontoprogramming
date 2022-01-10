@@ -1,0 +1,42 @@
+2pts.)
+1-CircletheletteroftheJavastatementthatdeclaresandallocatesa2­dimensionalarray
+of integers with​ four​ rows ​and​ five columns​:
+
+a) int array[4][5];
+b) int array[5][4];
+c) int array[ ] [ ] = new int [4][5];
+d) int array[ ] [ ] = new int [5][4];
+
+2-Which of the following can be returned from a Java method?
+a) Any primitive type
+b) Any class
+c) 1­dimensional array
+d) 2­dimensional array
+e) All of the above
+
+3- Show the Java code to​ declare​ a variable of type String and​ initialize​ it to “Whatever”.
+String myString = “Whatever”; or
+String myString = new String(“Whatever”);
+
+4-Show the Java code to​ declare​ and​ allocate​ an array with 497 elements of type double.
+
+5-Show one line of Java code that declares, allocates, and initializes an array of type integer with​ exactly 4 elements whose values are 97, 33, 44, and 12, in that order.
+
+​6-Write a Java​ conditional ​statement that implements the​ ​table below, where ​grade​ is an integer and ​school​ is a string. Both variables have been declared and ​grade ​has been initialized to a value greater than or equal to 1:
+  If ​grade​ is: 			Set ​school​ to:
+  1, 2, 3, 4, 5			Elementary School
+  6, 7, 8				Junior High
+  9, 10, 11, 12			High School
+   > 12					College
+   
+ 7-Convert the following into a​ valid​ Java expression:​ 15.2​ ≤​ limit ​≤​ 62.9:
+ 
+ 8-Show the declaration for a method called​ myMethod ​that 
+ 1) is visible outside the class, 
+ 2) can only​ ​access class (static) variables, 
+ 3) returns an array of integers, and 
+ 4) accepts two parameters which are a String and double, in that order.
+ 
+ 
+    
+
