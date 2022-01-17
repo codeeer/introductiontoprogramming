@@ -1,9 +1,13 @@
 package com.medipol.siralamaAlgoritmalari;
 
+import java.util.Arrays;
+
 public class QuickShort {
 
 	public static void main(String[] args) {
 		int[] arr = { 25, 11, 43, 67, 91, 55, 15,82 };
+		quickSort(arr, 2, 5);
+		//System.out.println(Arrays.toString(quickSort(arr, 2, 5)));
 
 	}
 
@@ -13,7 +17,9 @@ public class QuickShort {
 		      int pivotNewIndex = partition(arr, left, right, pivotIndex);
 		      quickSort(arr, left, pivotNewIndex - 1);
 		      quickSort(arr, pivotNewIndex + 1, right);
+		      System.out.println(Arrays.toString(arr));
 		   }
+		   //return arr;
 		}
 		  
 		public static int partition(int arr[], int left, int right, int pivotIndex) {

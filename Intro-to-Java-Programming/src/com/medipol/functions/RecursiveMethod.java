@@ -13,6 +13,24 @@ public class RecursiveMethod {
 			return 0;
 		}
 	}
+	
+	public static int recursiveTopla(int deger) {
+		if(deger <= 0) {
+			return 0;
+		}
+		else {
+			return (deger + recursiveTopla(deger -1));
+		}
+	}
+	public static int normalTopla(int deger) {
+		int toplam = 0;
+		while(deger > 0)
+		{
+			toplam += deger;
+			deger--;
+		}
+		return toplam;
+	}
 
 	public static int topla2(int a) {
 		if(a == 1) {
@@ -29,7 +47,8 @@ public class RecursiveMethod {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Klavyeden sayi giriniz");
 		int n = scanner.nextInt();// klavyeden sayi istedik.
-		int sonuc = sayilariTopla(n);
+		//int sonuc = sayilariTopla(n);
+		int sonuc = toplama(n);
 		System.out.println("Girilen sayidan 1'e kadar olan sayilar toplami = " + sonuc);
 	}
 	
@@ -51,12 +70,6 @@ public class RecursiveMethod {
 		}
 		return toplam;
 	}
-	
-	
-	
-	
-	
-	
 	
 	public static int sayilariTopla(int n) {
 		

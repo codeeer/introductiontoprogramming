@@ -19,10 +19,17 @@ String myString = “Whatever”; or
 String myString = new String(“Whatever”);
 
 4-Show the Java code to​ declare​ and​ allocate​ an array with 497 elements of type double.
+double [] array = new double[497];
+5-Show one line of Java code that declares, allocates,
+ and initializes an array of type integer 
+ with​ exactly 4 elements whose values 
+ are 97, 33, 44, and 12, in that order.
+ 
+ int[] array = {97,33,44,12}
 
-5-Show one line of Java code that declares, allocates, and initializes an array of type integer with​ exactly 4 elements whose values are 97, 33, 44, and 12, in that order.
-
-​6-Write a Java​ conditional ​statement that implements the​ ​table below, where ​grade​ is an integer and ​school​ is a string. Both variables have been declared and ​grade ​has been initialized to a value greater than or equal to 1:
+​6-Write a Java​ conditional ​statement that implements
+ the​ ​table below, where ​grade​ is an integer 
+ and ​school​ is a string. Both variables have been declared and ​grade ​has been initialized to a value greater than or equal to 1:
   If ​grade​ is: 			Set ​school​ to:
   1, 2, 3, 4, 5			Elementary School
   6, 7, 8				Junior High
@@ -30,12 +37,15 @@ String myString = new String(“Whatever”);
    > 12					College
    
  7-Convert the following into a​ valid​ Java expression:​ 15.2​ ≤​ limit ​≤​ 62.9:
- 
+ 15.2 <= limit && limit <= 62.9
  8-Show the declaration for a method called​ myMethod ​that 
  1) is visible outside the class, 
  2) can only​ ​access class (static) variables, 
  3) returns an array of integers, and 
  4) accepts two parameters which are a String and double, in that order.
+ 
+ 
+ http://unibilgi.net/images/vf/TOBB-JavaProgramlama-Final-Hakan-Tunc.pdf
  
  
     
