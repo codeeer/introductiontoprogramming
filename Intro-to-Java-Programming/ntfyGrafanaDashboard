@@ -10,17 +10,34 @@
     }
   ],
   "__requires": [
-    { "type": "grafana", "id": "grafana", "name": "Grafana", "version": "10.0.0" },
-    { "type": "datasource", "id": "prometheus", "name": "Prometheus", "version": "1.0.0" }
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
   ],
   "title": "ntfy - Sunucu Metrikleri",
   "uid": "ntfy-server-metrics",
-  "tags": ["ntfy", "prometheus", "notifications"],
+  "tags": [
+    "ntfy",
+    "prometheus",
+    "notifications"
+  ],
   "timezone": "browser",
   "schemaVersion": 39,
   "version": 2,
   "refresh": "30s",
-  "time": { "from": "now-6h", "to": "now" },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
   "editable": true,
   "templating": {
     "list": [
@@ -34,15 +51,21 @@
         "refresh": 1
       },
       {
-        "name": "instance",
-        "label": "Instance",
+        "name": "job",
+        "label": "Job",
         "type": "query",
-        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-        "query": "label_values(ntfy_http_requests_total, instance)",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "query": "label_values(ntfy_http_requests_total, job)",
         "refresh": 2,
         "includeAll": true,
         "multi": true,
-        "current": { "text": "All", "value": "$__all" }
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
       }
     ]
   },
@@ -50,138 +73,659 @@
     {
       "type": "stat",
       "title": "BaÅarÄ±lÄ± YayÄ±nlanan Bildirim (toplam)",
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "green", "value": null } ] } }, "overrides": [] },
-      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_messages_published_success{instance=~\"$instance\"})", "legendFormat": "BaÅarÄ±lÄ±" }
+        {
+          "refId": "A",
+          "expr": "sum(ntfy_messages_published_success{job=~\"$job\"})",
+          "legendFormat": "BaÅarÄ±lÄ±"
+        }
       ]
     },
     {
       "type": "stat",
       "title": "YayÄ±n HatasÄ± (toplam)",
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 1 } ] } }, "overrides": [] },
-      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_messages_published_failure{instance=~\"$instance\"})", "legendFormat": "Hata" }
+        {
+          "refId": "A",
+          "expr": "sum(ntfy_messages_published_failure{job=~\"$job\"})",
+          "legendFormat": "Hata"
+        }
       ]
     },
     {
       "type": "stat",
       "title": "Aktif Abone",
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "blue", "value": null } ] } }, "overrides": [] },
-      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_subscribers_total{instance=~\"$instance\"})", "legendFormat": "Abone" }
+        {
+          "refId": "A",
+          "expr": "sum(ntfy_subscribers_total{job=~\"$job\"})",
+          "legendFormat": "Abone"
+        }
       ]
     },
     {
       "type": "stat",
       "title": "HTTP Hata OranÄ± (4xx+5xx %)",
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "unit": "percent", "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 } ] } }, "overrides": [] },
-      "options": { "colorMode": "background", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "Hata %" }
+        {
+          "refId": "A",
+          "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..|5..\", job=~\"$job\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{job=~\"$job\"}[5m])), 1)",
+          "legendFormat": "Hata %"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Bildirim YayÄ±n HÄ±zÄ± (BaÅarÄ±lÄ± vs Hata, msg/s)",
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "showPoints": "never" }, "unit": "reqps" }, "overrides": [ { "matcher": { "id": "byName", "options": "Hata" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] } ] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10,
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Hata"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "mean",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(rate(ntfy_messages_published_success{instance=~\"$instance\"}[5m]))", "legendFormat": "BaÅarÄ±lÄ±" },
-        { "refId": "B", "expr": "sum(rate(ntfy_messages_published_failure{instance=~\"$instance\"}[5m]))", "legendFormat": "Hata" }
+        {
+          "refId": "A",
+          "expr": "sum(rate(ntfy_messages_published_success{job=~\"$job\"}[5m]))",
+          "legendFormat": "BaÅarÄ±lÄ±"
+        },
+        {
+          "refId": "B",
+          "expr": "sum(rate(ntfy_messages_published_failure{job=~\"$job\"}[5m]))",
+          "legendFormat": "Hata"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "HTTP Ä°stek HÄ±zÄ± (tÃ¼m kodlar)",
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10,
+            "stacking": {
+              "mode": "normal"
+            },
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "mean",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum by (http_code) (rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m]))", "legendFormat": "{{http_code}}" }
+        {
+          "refId": "A",
+          "expr": "sum by (http_code) (rate(ntfy_http_requests_total{job=~\"$job\"}[5m]))",
+          "legendFormat": "{{http_code}}"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Abonelerin GÃ¶receÄi Hata OranÄ± (4xx ve 5xx %)",
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 12, "showPoints": "never" }, "unit": "percent", "min": 0, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 } ] } }, "overrides": [ { "matcher": { "id": "byName", "options": "5xx %" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] }, { "matcher": { "id": "byName", "options": "4xx %" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } } ] } ] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max", "lastNotNull"] }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 12,
+            "showPoints": "never"
+          },
+          "unit": "percent",
+          "min": 0,
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "5xx %"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "4xx %"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "4xx %" },
-        { "refId": "B", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"5..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "5xx %" }
+        {
+          "refId": "A",
+          "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..\", job=~\"$job\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{job=~\"$job\"}[5m])), 1)",
+          "legendFormat": "4xx %"
+        },
+        {
+          "refId": "B",
+          "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"5..\", job=~\"$job\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{job=~\"$job\"}[5m])), 1)",
+          "legendFormat": "5xx %"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "HatalÄ± Ä°stek HÄ±zÄ± (HTTP kod bazÄ±nda, sadece 4xx/5xx)",
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 60, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max"] }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 60,
+            "stacking": {
+              "mode": "normal"
+            },
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum by (http_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m]))", "legendFormat": "{{http_code}}" }
+        {
+          "refId": "A",
+          "expr": "sum by (http_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", job=~\"$job\"}[5m]))",
+          "legendFormat": "{{http_code}}"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Hata TÃ¼rÃ¼ DaÄÄ±lÄ±mÄ± (ntfy_code) â hatanÄ±n nedeni",
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 70, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max"] }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 70,
+            "stacking": {
+              "mode": "normal"
+            },
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "topk(10, sum by (ntfy_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m])))", "legendFormat": "ntfy_code {{ntfy_code}}" }
+        {
+          "refId": "A",
+          "expr": "topk(10, sum by (ntfy_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", job=~\"$job\"}[5m])))",
+          "legendFormat": "ntfy_code {{ntfy_code}}"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Abone & Topic Trendi (ani dÃ¼ÅÃ¼Å = baÄlantÄ± kopmasÄ±)",
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 8, "showPoints": "never" }, "unit": "short" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 20
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 8,
+            "showPoints": "never"
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_subscribers_total{instance=~\"$instance\"})", "legendFormat": "Abone" },
-        { "refId": "B", "expr": "sum(ntfy_topics_total{instance=~\"$instance\"})", "legendFormat": "Topic" },
-        { "refId": "C", "expr": "sum(ntfy_visitors_total{instance=~\"$instance\"})", "legendFormat": "Visitor" }
+        {
+          "refId": "A",
+          "expr": "sum(ntfy_subscribers_total{job=~\"$job\"})",
+          "legendFormat": "Abone"
+        },
+        {
+          "refId": "B",
+          "expr": "sum(ntfy_topics_total{job=~\"$job\"})",
+          "legendFormat": "Topic"
+        },
+        {
+          "refId": "C",
+          "expr": "sum(ntfy_visitors_total{job=~\"$job\"})",
+          "legendFormat": "Visitor"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Mesaj YayÄ±n SÃ¼resi (ms)",
-      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 28 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "showPoints": "never" }, "unit": "ms" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10,
+            "showPoints": "never"
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "max(ntfy_message_publish_duration_ms{instance=~\"$instance\"})", "legendFormat": "publish ms" }
+        {
+          "refId": "A",
+          "expr": "max(ntfy_message_publish_duration_ms{job=~\"$job\"})",
+          "legendFormat": "publish ms"
+        }
       ]
     },
     {
       "type": "timeseries",
       "title": "Cache'lenmiÅ Mesaj & Toplam Attachment Boyutu",
-      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 28 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 6, "showPoints": "never" }, "unit": "short" }, "overrides": [ { "matcher": { "id": "byName", "options": "Attachment boyutu" }, "properties": [ { "id": "unit", "value": "bytes" } ] } ] },
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 6,
+            "showPoints": "never"
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Attachment boyutu"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_messages_cached_total{instance=~\"$instance\"})", "legendFormat": "Cache'li mesaj" },
-        { "refId": "B", "expr": "sum(ntfy_attachments_total_size{instance=~\"$instance\"})", "legendFormat": "Attachment boyutu" }
+        {
+          "refId": "A",
+          "expr": "sum(ntfy_messages_cached_total{job=~\"$job\"})",
+          "legendFormat": "Cache'li mesaj"
+        },
+        {
+          "refId": "B",
+          "expr": "sum(ntfy_attachments_total_size{job=~\"$job\"})",
+          "legendFormat": "Attachment boyutu"
+        }
       ]
     }
   ]
