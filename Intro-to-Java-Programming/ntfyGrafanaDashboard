@@ -18,7 +18,7 @@
   "tags": ["ntfy", "prometheus", "notifications"],
   "timezone": "browser",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "refresh": "30s",
   "time": { "from": "now-6h", "to": "now" },
   "editable": true,
@@ -49,7 +49,7 @@
   "panels": [
     {
       "type": "stat",
-      "title": "YayÄ±nlanan Mesaj (toplam)",
+      "title": "BaÅarÄ±lÄ± YayÄ±nlanan Bildirim (toplam)",
       "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
       "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "green", "value": null } ] } }, "overrides": [] },
@@ -82,21 +82,21 @@
     },
     {
       "type": "stat",
-      "title": "Topic SayÄ±sÄ±",
+      "title": "HTTP Hata OranÄ± (4xx+5xx %)",
       "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "purple", "value": null } ] } }, "overrides": [] },
-      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "fieldConfig": { "defaults": { "unit": "percent", "color": { "mode": "thresholds" }, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 } ] } }, "overrides": [] },
+      "options": { "colorMode": "background", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_topics_total{instance=~\"$instance\"})", "legendFormat": "Topic" }
+        { "refId": "A", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "Hata %" }
       ]
     },
     {
       "type": "timeseries",
-      "title": "Mesaj YayÄ±n HÄ±zÄ± (msg/s)",
+      "title": "Bildirim YayÄ±n HÄ±zÄ± (BaÅarÄ±lÄ± vs Hata, msg/s)",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "showPoints": "never" }, "unit": "reqps" }, "overrides": [ { "matcher": { "id": "byName", "options": "Hata" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] } ] },
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] }, "tooltip": { "mode": "multi" } },
       "targets": [
         { "refId": "A", "expr": "sum(rate(ntfy_messages_published_success{instance=~\"$instance\"}[5m]))", "legendFormat": "BaÅarÄ±lÄ±" },
@@ -105,7 +105,7 @@
     },
     {
       "type": "timeseries",
-      "title": "HTTP Ä°stek HÄ±zÄ± (kod bazÄ±nda)",
+      "title": "HTTP Ä°stek HÄ±zÄ± (tÃ¼m kodlar)",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
       "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
@@ -116,19 +116,55 @@
     },
     {
       "type": "timeseries",
-      "title": "HTTP Hata OranÄ± (5xx %)",
-      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 12 },
+      "title": "Abonelerin GÃ¶receÄi Hata OranÄ± (4xx ve 5xx %)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 15, "showPoints": "never" }, "unit": "percent", "min": 0, "max": 100, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 } ] } }, "overrides": [] },
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 12, "showPoints": "never" }, "unit": "percent", "min": 0, "thresholds": { "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 } ] } }, "overrides": [ { "matcher": { "id": "byName", "options": "5xx %" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] }, { "matcher": { "id": "byName", "options": "4xx %" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } } ] } ] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max", "lastNotNull"] }, "tooltip": { "mode": "multi" } },
       "targets": [
-        { "refId": "A", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"5..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "5xx %" }
+        { "refId": "A", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"4..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "4xx %" },
+        { "refId": "B", "expr": "100 * sum(rate(ntfy_http_requests_total{http_code=~\"5..\", instance=~\"$instance\"}[5m])) / clamp_min(sum(rate(ntfy_http_requests_total{instance=~\"$instance\"}[5m])), 1)", "legendFormat": "5xx %" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "HatalÄ± Ä°stek HÄ±zÄ± (HTTP kod bazÄ±nda, sadece 4xx/5xx)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 60, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max"] }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "refId": "A", "expr": "sum by (http_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m]))", "legendFormat": "{{http_code}}" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Hata TÃ¼rÃ¼ DaÄÄ±lÄ±mÄ± (ntfy_code) â hatanÄ±n nedeni",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 70, "stacking": { "mode": "normal" }, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["max"] }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "refId": "A", "expr": "topk(10, sum by (ntfy_code) (rate(ntfy_http_requests_total{http_code=~\"4..|5..\", instance=~\"$instance\"}[5m])))", "legendFormat": "ntfy_code {{ntfy_code}}" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Abone & Topic Trendi (ani dÃ¼ÅÃ¼Å = baÄlantÄ± kopmasÄ±)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 8, "showPoints": "never" }, "unit": "short" }, "overrides": [] },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "refId": "A", "expr": "sum(ntfy_subscribers_total{instance=~\"$instance\"})", "legendFormat": "Abone" },
+        { "refId": "B", "expr": "sum(ntfy_topics_total{instance=~\"$instance\"})", "legendFormat": "Topic" },
+        { "refId": "C", "expr": "sum(ntfy_visitors_total{instance=~\"$instance\"})", "legendFormat": "Visitor" }
       ]
     },
     {
       "type": "timeseries",
       "title": "Mesaj YayÄ±n SÃ¼resi (ms)",
-      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 12 },
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 28 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
       "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10, "showPoints": "never" }, "unit": "ms" }, "overrides": [] },
       "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
@@ -138,34 +174,14 @@
     },
     {
       "type": "timeseries",
-      "title": "Visitor / User / Cached Mesaj",
-      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 12 },
+      "title": "Cache'lenmiÅ Mesaj & Toplam Attachment Boyutu",
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 28 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 5, "showPoints": "never" }, "unit": "short" }, "overrides": [] },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "fillOpacity": 6, "showPoints": "never" }, "unit": "short" }, "overrides": [ { "matcher": { "id": "byName", "options": "Attachment boyutu" }, "properties": [ { "id": "unit", "value": "bytes" } ] } ] },
       "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
       "targets": [
-        { "refId": "A", "expr": "sum(ntfy_visitors_total{instance=~\"$instance\"})", "legendFormat": "Visitor" },
-        { "refId": "B", "expr": "sum(ntfy_users_total{instance=~\"$instance\"})", "legendFormat": "User" },
-        { "refId": "C", "expr": "sum(ntfy_messages_cached_total{instance=~\"$instance\"})", "legendFormat": "Cached" }
-      ]
-    },
-    {
-      "type": "timeseries",
-      "title": "Kanal BazÄ±nda GÃ¶nderim HÄ±zÄ± (Email / Call / Firebase / UnifiedPush / Matrix)",
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 20 },
-      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 8, "showPoints": "never" }, "unit": "reqps" }, "overrides": [] },
-      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] }, "tooltip": { "mode": "multi" } },
-      "targets": [
-        { "refId": "A", "expr": "sum(rate(ntfy_emails_sent_success{instance=~\"$instance\"}[5m]))", "legendFormat": "Email OK" },
-        { "refId": "B", "expr": "sum(rate(ntfy_emails_sent_failure{instance=~\"$instance\"}[5m]))", "legendFormat": "Email Hata" },
-        { "refId": "C", "expr": "sum(rate(ntfy_calls_made_success{instance=~\"$instance\"}[5m]))", "legendFormat": "Call OK" },
-        { "refId": "D", "expr": "sum(rate(ntfy_calls_made_failure{instance=~\"$instance\"}[5m]))", "legendFormat": "Call Hata" },
-        { "refId": "E", "expr": "sum(rate(ntfy_firebase_published_success{instance=~\"$instance\"}[5m]))", "legendFormat": "Firebase OK" },
-        { "refId": "F", "expr": "sum(rate(ntfy_firebase_published_failure{instance=~\"$instance\"}[5m]))", "legendFormat": "Firebase Hata" },
-        { "refId": "G", "expr": "sum(rate(ntfy_unifiedpush_published_success{instance=~\"$instance\"}[5m]))", "legendFormat": "UnifiedPush OK" },
-        { "refId": "H", "expr": "sum(rate(ntfy_matrix_published_success{instance=~\"$instance\"}[5m]))", "legendFormat": "Matrix OK" },
-        { "refId": "I", "expr": "sum(rate(ntfy_matrix_published_failure{instance=~\"$instance\"}[5m]))", "legendFormat": "Matrix Hata" }
+        { "refId": "A", "expr": "sum(ntfy_messages_cached_total{instance=~\"$instance\"})", "legendFormat": "Cache'li mesaj" },
+        { "refId": "B", "expr": "sum(ntfy_attachments_total_size{instance=~\"$instance\"})", "legendFormat": "Attachment boyutu" }
       ]
     }
   ]
